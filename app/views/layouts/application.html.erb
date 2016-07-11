@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VideoHosting</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% if notice.present? %>
+    <div class="notice">
+      <div class="container">
+        <%= notice %>
+      </div>
+    </div>
+  <% end %>
+  <% if alert.present? %>
+    <div class="alert">
+      <div class="container">
+        <%= alert %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render "shared/header" %>
+  <div class="container">
+    <%= yield %>
+  </div>
+
+</body>
+</html>
