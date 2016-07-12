@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Images</h1>
+<h1>Listing Videos</h1>
 
 <table>
   <thead>
@@ -16,7 +14,6 @@
     <% @videos.each do |video| %>
       <tr>
         <td><%= video.title %></td>
-        <td><%= video.user %></td>
         <td><%= video.file %></td>
         <td><%= link_to 'Show', video %></td>
         <td><%= link_to 'Edit', edit_video_path(video) %></td>
@@ -28,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Image', new_video_path %>
+<%= link_to 'New Video', new_video_path %>

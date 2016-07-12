@@ -1,19 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @image.title %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @image.user %>
-</p>
+<h1><%= @video.title %></h1>
 
 <p>
   <strong>File:</strong>
-  <%= @image.file %>
+  <%= @video.file %>
 </p>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>
