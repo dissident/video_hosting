@@ -1,0 +1,20 @@
+<div class="row video_line">
+  <div class="col-md-3 name">
+    <%= locals[:video].title %>
+  </div>
+  <div class="col-md-3 owner">
+    <%= locals[:video].user.email if locals[:video].user.present? %>
+  </div>
+  <div class="col-md-3 tags">
+    <% if locals[:video].tags.present? %>
+      <% locals[:video].tags.each do |tag| %>
+        <span class="label label-info">
+          <%= tag.name %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-3 download">
+    <%= link_to "Download", locals[:video].file.url, class: "btn btn-primary" %>
+  </div>
+</div>

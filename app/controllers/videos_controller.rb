@@ -3,7 +3,11 @@ class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
 
   def index
-    @videos = Video.all
+    if user_signed_in?
+      @videos = current_user.videos
+    else
+      redirect_to new_user_session_path, alert: "User must be logged."
+    end
   end
 
   def show
@@ -36,6 +40,20 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     redirect_to videos_url, notice: 'Video was successfully destroyed.'
+  end
+
+  def upload
+    video = Video.new(video_params)
+    if user_signed_in?
+      video.user = current_user
+      if video.save
+        render json: { status: :ok }
+      else
+        render json: { status: :error, errors: video.errors.messages }
+      end
+    else
+      render json: { status: :unforbiden }
+    end
   end
 
   private

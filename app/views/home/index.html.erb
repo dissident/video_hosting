@@ -1,1 +1,10 @@
-<%= link_to "Videos", videos_path %>
+<h1>List of all videos</h1>
+
+<% if @videos.present?%>
+  <% @videos.each do |video| %>
+    <%= render 'shared/video_block', locals: { video: video } %>
+  <% end %>
+<% end %>
+
+
+<%= link_to "My Videos", videos_path %>
