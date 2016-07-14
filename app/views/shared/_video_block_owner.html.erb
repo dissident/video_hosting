@@ -1,20 +1,39 @@
 <div class="row video_line">
   <div class="col-md-3 name">
-    <%= locals[:video].title %>
-  </div>
-  <div class="col-md-3 owner">
-    <%= locals[:video].user.email if locals[:video].user.present? %>
+    <div class="text"><%= locals[:video].title %></div>
+    <div class="input hide">
+      <%= form_for(locals[:video]) do |f| %>
+          <div class="field">
+            <%= f.text_field :title %>
+          </div>
+      <% end %>
+    </div>
   </div>
   <div class="col-md-3 tags">
     <% if locals[:video].tags.present? %>
       <% locals[:video].tags.each do |tag| %>
         <span class="label label-info">
-          <%= tag.name %>
+          <%= tag.title %>
+          <%= link_to 'x', delete_tag_path(tag.id, locals[:video].id), method: :delete %>
         </span>
       <% end %>
     <% end %>
+    <div class="add_tag">
+      <%= link_to "Add tag", '' %>
+      <div class="add_tag_input hide">
+        <%= form_for(Tag.new) do |f| %>
+            <div class="field">
+              <%= f.text_field :title %>
+            </div>
+            <%= f.hidden_field :video_id, value: locals[:video].id %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="col-md-3 download">
-    <%= link_to "Download", locals[:video].file.url, class: "btn btn-primary" %>
+  <div class="col-md-3 change_title_column">
+    <%= link_to "Change title", '', class: "change_video_title"%>
+  </div>
+  <div class="col-md-3 delete">
+    <%= link_to "Delete", locals[:video], method: :delete %>
   </div>
 </div>

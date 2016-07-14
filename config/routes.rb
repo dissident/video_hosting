@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :videos
+  resources :videos, only: [:index, :update, :destroy]
+  resources :tags, only: :create
 
   post '/video_upload' => 'videos#upload'
+  delete '/delete_tag/:id/:video' => 'tags#destroy', as: :delete_tag
 
   # Example resource route with options:
   #   resources :products do

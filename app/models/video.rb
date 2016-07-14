@@ -1,16 +1,13 @@
 class Video < ActiveRecord::Base
 
   belongs_to :user, inverse_of: :videos
+  has_and_belongs_to_many :tags, dependent: :nullify
 
   mount_uploader :file, BaseUploader
 
-  validates :title, :file, presence: true
+  validates :file, presence: true
 
-  before_validation :get_filename_from_file
-
-  def tags
-    []
-  end
+  before_save :get_filename_from_file
 
   private
 

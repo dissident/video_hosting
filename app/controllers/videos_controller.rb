@@ -1,43 +1,28 @@
 class VideosController < ApplicationController
 
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [ :update, :destroy]
 
   def index
     if user_signed_in?
       @videos = current_user.videos
+      @new_video = Video.new
     else
       redirect_to new_user_session_path, alert: "User must be logged."
     end
   end
 
-  def show
-  end
-
-  def new
-    @video = Video.new
-  end
-
-  def create
-    @video = Video.new(video_params)
-    if @video.save
-      redirect_to @video, notice: 'Video was successfully created.'
-    else
-      render :new
-    end
-  end
-
   def update
+    check_video_owner(@video)
     if @video.update(video_params)
-      redirect_to @video, notice: 'Video was successfully updated.'
+      redirect_to videos_path, notice: 'Video was successfully updated.'
     else
-      render :edit
+      redirect_to videos_path, notice: 'Video was not updated.'
     end
   end
 
-  def edit
-  end
 
   def destroy
+    check_video_owner(@video)
     @video.destroy
     redirect_to videos_url, notice: 'Video was successfully destroyed.'
   end
@@ -49,7 +34,7 @@ class VideosController < ApplicationController
       if video.save
         render json: { status: :ok }
       else
-        render json: { status: :error, errors: video.errors.messages }
+        render json: { status: :error, errors: video.errors.messages }, status: 422
       end
     else
       render json: { status: :unforbiden }
@@ -57,6 +42,12 @@ class VideosController < ApplicationController
   end
 
   private
+
+  def check_video_owner(video)
+    unless user_signed_in? && video.user = current_user
+      redirect_to new_user_session_path, alert: "User must be logged."
+    end
+  end
 
   def set_video
     @video = Video.find(params[:id])
