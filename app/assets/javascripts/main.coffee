@@ -21,10 +21,10 @@ ready = ->
               console.log("complete")
 
       $('.videos_list').append("<div class='row video_line uploaded'>
-        <div class='col-md-3'>Видео загружается ...</div>
+        <div class='col-md-3'>Uploading ...</div>
         <div class='col-md-3 '></div>
         <div class='col-md-3 percents'></div>
-        <div class='col-md-3 cancel'><button class='cancel'>Отменить</button></div>")
+        <div class='col-md-3 cancel'><button class='cancel'>Cancel upload</button></div>")
 
       $('button.cancel').click (e) ->
         jqXHR.abort()
