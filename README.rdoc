@@ -1,28 +1,21 @@
-== README
+== Video hosting
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App for upload, download and hosting videofiles.
 
-Things you may want to cover:
+Ruby version: 2.3.0
+Rails version: 4.2.6
 
-* Ruby version
+For testing used Selenium webdriver, so you must have Firefox (28 version was used for development)
 
-* System dependencies
+For use:
 
-* Configuration
+<tt>bundle install</tt>
+<tt>bundle exec rake db:create db:migrate</tt>
+<tt>bundle exec rails server</tt>
 
-* Database creation
+For test:
 
-* Database initialization
+<tt>bundle exec rspec</tt>
+<tt>bundle exec cucumber</tt>
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+License: You can use this code anywhere, I do not mind, I have many tons of code with this quality.
