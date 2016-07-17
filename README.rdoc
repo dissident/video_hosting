@@ -3,6 +3,7 @@
 App for upload, download and hosting videofiles.
 
 Ruby version: 2.3.0
+
 Rails version: 4.2.6
 
 For testing used Selenium webdriver, so you must have Firefox (28 version was used for development)
@@ -10,12 +11,15 @@ For testing used Selenium webdriver, so you must have Firefox (28 version was us
 For use:
 
 <tt>bundle install</tt>
+
 <tt>bundle exec rake db:create db:migrate</tt>
+
 <tt>bundle exec rails server</tt>
 
 For test:
 
 <tt>bundle exec rspec</tt>
+
 <tt>bundle exec cucumber</tt>
 
 License: You can use this code anywhere, I do not mind, I have many tons of code with this quality.
