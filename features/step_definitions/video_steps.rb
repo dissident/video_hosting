@@ -13,7 +13,7 @@ When(/^I go to my videos list$/) do
   expect(page).to have_content 'My videos Listing Videos of testing@man.net'
 end
 
-When(/^I create video$/) do
+Then(/^I create video$/) do
   page.execute_script("$('#video_file').removeClass('hide')");
   attach_file('video[file]', File.absolute_path('./spec/files/bird.avi'))
   sleep 1
@@ -35,7 +35,6 @@ Then(/^I can change title of video$/) do
 end
 
 Then(/^I can add tags to video$/) do
-  visit '/videos'
   click_link 'Add tag'
   fill_in 'tag_title', with: 'Humor'
   find_field('tag_title').native.send_key(:enter)
@@ -44,22 +43,41 @@ Then(/^I can add tags to video$/) do
 end
 
 Then(/^I can remove tags from video$/) do
-  visit '/videos'
   click_link 'x'
   expect(page).not_to have_content('Humor')
 end
 
 Then(/^I can delete video$/) do
-  visit '/videos'
   click_link 'Delete'
   expect(page).not_to have_content('Best video')
 end
 
 Then(/^i can cancel upload of video$/) do
-  visit '/videos'
   page.execute_script("$('#video_file').removeClass('hide')");
   attach_file('video[file]', File.absolute_path('./spec/files/bird.avi'))
   click_button 'Cancel upload'
   page.driver.browser.switch_to.alert.accept
   expect(page).not_to have_content('bird.avi')
+end
+
+When(/^I go to root page$/) do
+  visit '/videos'
+  expect(page).to have_content('User must be logged.')
+  visit '/'
+  expect(page.status_code).to eq(200)
+end
+
+Then(/^I can't see 'My video' link$/) do
+  expect(page).not_to have_content('My video')
+end
+
+Then(/^I can see Login link$/) do
+  expect(page).to have_content('Log in')
+  expect(page).to have_content('Sign up')
+end
+
+Then(/^I can see uploaded videos$/) do
+  video = FactoryGirl.create(:video)
+  visit '/'
+  expect(page).to have_content(video.title)
 end

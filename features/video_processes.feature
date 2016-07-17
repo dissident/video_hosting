@@ -1,13 +1,18 @@
 Feature: Video processes
 
   @javascript
-  Scenario: Login ability
+  Scenario: User auth
     Given I am a new, authenticated user
     When I go to my videos list
-    When I create video
+    Then I create video
     Then I see video in list
     Then I can change title of video
     Then I can add tags to video
     Then I can remove tags from video
     Then I can delete video
-    Then i can cancel upload of video
+
+  Scenario: User not auth
+    When I go to root page
+    Then I can't see 'My video' link
+    Then I can see Login link
+    Then I can see uploaded videos
