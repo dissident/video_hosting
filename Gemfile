@@ -51,7 +51,7 @@ group :development do
   gem 'spring'
 end
 
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'devise'
 gem 'carrierwave'
 gem "jquery-fileupload-rails"
